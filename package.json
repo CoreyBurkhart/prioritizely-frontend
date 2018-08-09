@@ -17,8 +17,8 @@
     "clean": "rimraf dist/*",
     "client:build": "webpack --mode production",
     "client:start": "webpack-dev-server --mode development",
-    "client:lint": "npx eslint src/client",
     "server:start": "export NODE_ENV=development && nodemon --exec babel-node src/server/index.js",
+    "test:lint": "npx eslint src/client",
     "test:unit": "export NODE_ENV=test && npx jest",
     "test:e2e": "export NODE_ENV=test && npx testcafe chrome test/e2e/*"
   },
