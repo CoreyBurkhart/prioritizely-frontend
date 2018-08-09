@@ -24,9 +24,11 @@ jobs:
           name: Restore Yarn Package Cache
           keys:
             - yarn-packages-{{ checksum "yarn.lock" }}
+        
       - run:
           name: Install Dependencies
           command: yarn install
+
       - save_cache:
           name: Save Yarn Package Cache
           key: yarn-packages-{{ checksum "yarn.lock" }}
@@ -34,17 +36,17 @@ jobs:
             - ~/.cache/yarn
         
       - run:
-        - name: lint
-        - command: yarn run test:lint
+          name: lint
+          command: yarn run test:lint
 
       - run:
-        - name: unit test
-        - command: yarn run test:unit
+          name: unit test
+          command: yarn run test:unit
 
       - run: yarn run client:start
 
       - run:
-        - name: e2e test
-        - command: yarn run test:e2e
+          name: e2e test
+          command: yarn run test:e2e
 
 
