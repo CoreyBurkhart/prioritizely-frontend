@@ -3,23 +3,14 @@
 
 ## Feature Checkpoints
   - [ ] Project Bootstrap
-    - [x] Minimum functional backend created
-    - [x] Configure project config injection (Backend)
     - [x] Minimum functional React frontend created
+    - [ ] Configure project config injection
     - [x] Add Unit testing environment
     - [x] Add E2E testing environment
     - [x] Configure Frontend Coder Linting
-    - [ ] Create functional Docker deployment
-    - [ ] Link to Continuous integration Platform (CircleCI)
-    - [ ] Configure Typescript for backend??
+    - [x] Link to Continuous integration Platform (CircleCI)
 
-  - [ ] Backend Authentication API
-    - [ ] Client can signup via email
-    - [ ] Client can signup using gmail account
-    - [ ] Client can signup using facebook account
-    - [ ] Client can login
-    - [ ] Client can edit their profile information
-    - [ ] Client can delete their account
+  - [ ] Backend Work (See prioritizely-backend progress.md)
 
   - [ ] Frontend Mockups
     - [ ] Define user feature requirements
@@ -29,11 +20,7 @@
     - [ ] Design large screen online views
     - [ ] Define Component heirarchy specs from views (define props, events)
   
-  - [ ] Backend Main API
-    - [ ] Define routes based on frontend design
-    - [ ] Define route specifications
-    - [ ] Create route tests
-    - [ ] Create routes
+  - [ ] Backend Work (See prioritizely-backend progress.md)
   
   - [ ] Build Frontend
 
@@ -41,4 +28,5 @@
 ## Log
   | Date        | Progress Summary                                                       | Time Worked (Hrs)|
   | ----------- | ---------------------------------------------------------------------- | ---------------- |
-  | 08-07-2018  | Project start                                                          |  
+  | 08-07-2018  | Project start                                                          | 5                |
+  | 08-08-2018  | Configure environments and testing                                     | 5                |

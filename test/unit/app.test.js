@@ -1,7 +1,7 @@
-import App from '../../src/client/App.jsx'
+import App from '../../src/App.jsx'
 
 describe("App.js", () => {
   test("example", () => {
-    expect(new App()).toBeInstanceOf(App)
+    new App()
   })
 })

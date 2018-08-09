@@ -1,5 +1,5 @@
 {
-  "name": "prioritizely",
+  "name": "prioritizely-frontend",
   "version": "1.0.0",
   "main": "index.js",
   "repository": "https://github.com/CoreyBurkhart/prioritizely.git",
@@ -8,17 +8,15 @@
   "private": true,
   "dependencies": {
     "dotenv": "^6.0.0",
-    "express": "^4.16.3",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
-    "react-router": "^4.3.1"
+    "react-router-dom": "^4.3.1"
   },
   "scripts": {
     "clean": "rimraf dist/*",
-    "client:build": "webpack --mode production",
-    "client:start": "webpack-dev-server --mode development",
-    "server:start": "export NODE_ENV=development && nodemon --exec babel-node src/server/index.js",
-    "test:lint": "npx eslint src/client",
+    "build": "webpack --mode production",
+    "dev:start": "webpack-dev-server --mode development",
+    "lint": "npx eslint \"src/**/*.@(js|jsx)\"",
     "test:unit": "export NODE_ENV=test && npx jest",
     "test:e2e": "export NODE_ENV=test && npx testcafe chrome:headless test/e2e/*"
   },
