@@ -35,10 +35,10 @@ jobs:
           paths:
             - ~/.cache/yarn
 
-      - run: 
-        name: Start Frontend Server
-        command: yarn run client:start
-        background: true      
+      - run:
+          name: Start Frontend Server
+          command: yarn run client:start
+          background: true      
         
       - run:
           name: Run Code Linter
