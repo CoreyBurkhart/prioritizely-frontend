@@ -9,8 +9,8 @@ const htmlPlugin = new HtmlWebPackPlugin({
 module.exports = {
   entry: "./src/index.js",
   output: {
-    filename: "app.bundle.js",
-    path: path.resolve(__dirname, "./dist")
+    filename: "app.dev.js",
+    path: path.resolve(__dirname, "./../dist/static")
   },
   module: {
     rules: [
@@ -39,13 +39,12 @@ module.exports = {
     ]
   },
 
+  /**
+   * Implicitly resolve .js & .jsx extensions (No need to include file extension in import statements)
+   */
   resolve: {
     extensions: ['.js', '.jsx'],
   },
 
-  plugins: [htmlPlugin],
-
-  devServer: {
-    noInfo: true
-  }
+  plugins: [htmlPlugin]
 };

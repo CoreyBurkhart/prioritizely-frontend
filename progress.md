@@ -4,13 +4,20 @@
 ## Feature Checkpoints
   - [ ] Project Bootstrap
     - [x] Minimum functional React frontend created
-    - [ ] Configure project config injection
+    - [x] Configure project config injection
     - [x] Add Unit testing environment
     - [x] Add E2E testing environment
     - [x] Configure Frontend Coder Linting
     - [x] Link to Continuous integration Platform (CircleCI)
+    - [x] Configure sass transpilation as links w/ media attributes
+    - [x] Configure a production build
 
   - [ ] Backend Work (See prioritizely-backend progress.md)
+
+  - [ ] Link frontend w/ backend API for e2e testing
+    - [ ] Get the latest stable backend API repo
+    - [ ] Create a simple static production server
+    - [ ] Merge the backend API router w/ the static server
 
   - [ ] Frontend Mockups
     - [ ] Define user feature requirements

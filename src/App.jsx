@@ -5,7 +5,6 @@ import {
   Switch,
 } from 'react-router-dom';
 import HomeView from './views/HomeView';
-import './test.sass';
 
 export default function App() {
   return (
