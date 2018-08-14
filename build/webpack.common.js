@@ -1,4 +1,5 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const path = require("path")
 
 const htmlPlugin = new HtmlWebPackPlugin({
@@ -6,11 +7,20 @@ const htmlPlugin = new HtmlWebPackPlugin({
   filename: "index.html"
 });
 
+const extractCssPlugin = new MiniCssExtractPlugin({
+  // Options similar to the same options in webpackOptions.output
+  // both options are optional
+  filename: "[name].css",
+  chunkFilename: "[id].css"
+})
+
 module.exports = {
-  entry: "./src/index.js",
+  entry: {
+    main: "./src/index.js",
+  },
   output: {
-    filename: "app.dev.js",
-    path: path.resolve(__dirname, "./../dist/static")
+    filename: "[name].[hash].js",
+    path: path.resolve(__dirname, "./../dist")
   },
   module: {
     rules: [
@@ -22,19 +32,13 @@ module.exports = {
         }
       },
       {
-        test: /\.css$/,
+        test: /\.(sa|sc|c)ss$/,
         use: [
-          "style-loader", 
-          "css-loader"
-        ]
-      },
-      {
-        test: /\.s[a|c]ss$/,
-        use: [
-          "style-loader",
-          "css-loader",
-          "sass-loader"
-        ]
+          'style-loader',
+          'css-loader',
+          'postcss-loader',
+          'sass-loader',
+        ],
       }
     ]
   },
@@ -46,5 +50,8 @@ module.exports = {
     extensions: ['.js', '.jsx'],
   },
 
-  plugins: [htmlPlugin]
+  plugins: [
+    htmlPlugin,
+    extractCssPlugin
+  ]
 };
