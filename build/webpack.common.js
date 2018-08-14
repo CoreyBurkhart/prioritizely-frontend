@@ -13,11 +13,10 @@ const swPlugin = new WorkboxPlugin.InjectManifest({
 
 module.exports = {
   entry: {
-    main: "./src/index.js"
+    main: "./src/index.js",
   },
-
   output: {
-    filename: "[name].bundle.js",
+    filename: "[name].[hash].js",
     path: path.resolve(__dirname, "./../dist")
   },
 
@@ -31,19 +30,13 @@ module.exports = {
         }
       },
       {
-        test: /\.css$/,
+        test: /\.(sa|sc|c)ss$/,
         use: [
-          "style-loader", 
-          "css-loader"
-        ]
-      },
-      {
-        test: /\.s[a|c]ss$/,
-        use: [
-          "style-loader",
-          "css-loader",
-          "sass-loader"
-        ]
+          'style-loader',
+          'css-loader',
+          'postcss-loader',
+          'sass-loader',
+        ],
       }
     ]
   },
