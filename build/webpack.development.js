@@ -5,7 +5,8 @@ const dev = {
   mode: "development",
 
   devServer: {
-    noInfo: true
+    noInfo: true,
+    contentBase: './dist'
   }
 }
 

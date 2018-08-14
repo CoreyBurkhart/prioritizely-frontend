@@ -1,4 +1,5 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
+const WorkboxPlugin = require("workbox-webpack-plugin");
 const path = require("path")
 
 const htmlPlugin = new HtmlWebPackPlugin({
@@ -6,12 +7,20 @@ const htmlPlugin = new HtmlWebPackPlugin({
   filename: "index.html"
 });
 
+const swPlugin = new WorkboxPlugin.InjectManifest({
+  swSrc: "./src/service-worker.js"
+})
+
 module.exports = {
-  entry: "./src/index.js",
-  output: {
-    filename: "app.dev.js",
-    path: path.resolve(__dirname, "./../dist/static")
+  entry: {
+    main: "./src/index.js"
   },
+
+  output: {
+    filename: "[name].bundle.js",
+    path: path.resolve(__dirname, "./../dist")
+  },
+
   module: {
     rules: [
       {
@@ -46,5 +55,8 @@ module.exports = {
     extensions: ['.js', '.jsx'],
   },
 
-  plugins: [htmlPlugin]
+  plugins: [
+    htmlPlugin,
+    swPlugin
+  ]
 };

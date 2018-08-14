@@ -37,3 +37,5 @@
   | ----------- | ---------------------------------------------------------------------- | ---------------- |
   | 08-07-2018  | Project start                                                          | 5                |
   | 08-08-2018  | Configure environments and testing                                     | 5                |
+  | 08-09-2018  | Configure Sass transpilation, separate into 2 repos                    | 7                |
+  | 08-13-2018  | Configure Mongo testing env. Explore service workers & assoc. libs.    | 5                |
