@@ -1,15 +1,22 @@
-// service worker
-const CACHE_URLS = [
-  '/static/css/base/index.css',
-  '/static/css/tablet/index.css',
-  '/static/css/desktop/index.css',
-]
+/* global workbox */
+/* eslint no-underscore-dangle: ["error", { "allow": ["__precacheManifest"] }] */
 
-const precacheManifest = CACHE_URLS.concat(self.__precacheManifest || [])
+let precacheManifest = this.__precacheManifest || [];
+const revisionRe = /.+\.\w{20}\.js/;
 
-workbox.precaching.precacheAndRoute(precacheManifest);
+// add the revision property if it is only present in the url
+precacheManifest = precacheManifest.map((entry) => {
+  let r = entry;
 
-self.addEventListener('install', function(event) {
-  // service worker install step
-  console.log('service worker installed!')
-})
+  if ('url' in entry && revisionRe.test(entry.url)) {
+    const [revision] = entry.url.match(/\w{20}(?=\.js)/);
+    r = {
+      revision,
+      url: entry.url,
+    };
+  }
+
+  return r;
+});
+
+workbox.precaching.precacheAndRoute(precacheManifest, workbox.strategies.staleWhileRevalidate());

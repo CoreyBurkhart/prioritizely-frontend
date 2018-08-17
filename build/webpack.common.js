@@ -8,16 +8,28 @@ const htmlPlugin = new HtmlWebPackPlugin({
 });
 
 const swPlugin = new WorkboxPlugin.InjectManifest({
-  swSrc: "./src/service-worker.js"
+  swSrc: "./src/service-worker.js",
+  exclude: [/hot-update/],
 })
 
 module.exports = {
   entry: {
     main: "./src/index.js",
   },
+  
   output: {
     filename: "[name].[hash].js",
-    path: path.resolve(__dirname, "./../dist")
+    path: path.resolve(__dirname, "./../dist"),
+  },
+
+  stats: {
+    assets: false,
+    colors: true,
+    version: false,
+    hash: true,
+    timings: true,
+    chunks: false,
+    chunkModules: false
   },
 
   module: {
