@@ -11,6 +11,8 @@
     - [x] Link to Continuous integration Platform (CircleCI)
     - [x] Configure sass transpilation as links w/ media attributes
     - [x] Configure a production build
+    - [x] Add service worker caching for offline experience 
+    - [x] Break production build into separate chunks
 
   - [ ] Backend Work (See prioritizely-backend progress.md)
 

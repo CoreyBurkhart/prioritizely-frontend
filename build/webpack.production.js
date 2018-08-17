@@ -1,6 +1,7 @@
 const merge = require('webpack-merge')
 const common = require('./webpack.common.js')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const webpack = require('webpack')
 
 const prod = {
   mode: "production",
@@ -17,7 +18,13 @@ const prod = {
         ],
       }
     ]
-  }
+  },
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: '[name].css'
+    }),
+    new webpack.HashedModuleIdsPlugin()
+  ]
 }
 
 module.exports = merge(common, prod)

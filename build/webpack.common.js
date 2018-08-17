@@ -9,7 +9,10 @@ const htmlPlugin = new HtmlWebPackPlugin({
 
 const swPlugin = new WorkboxPlugin.InjectManifest({
   swSrc: "./src/service-worker.js",
-  exclude: [/hot-update/],
+  exclude: [
+    /hot-update/,
+    /\.map/
+  ],
 })
 
 module.exports = {
@@ -58,6 +61,19 @@ module.exports = {
    */
   resolve: {
     extensions: ['.js', '.jsx'],
+  },
+
+  optimization: {
+    runtimeChunk: 'single',
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all'
+        }
+      }
+    }
   },
 
   plugins: [
