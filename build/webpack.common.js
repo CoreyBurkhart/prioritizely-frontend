@@ -1,5 +1,6 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const WorkboxPlugin = require("workbox-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin")
 const path = require("path")
 
 const htmlPlugin = new HtmlWebPackPlugin({
@@ -14,6 +15,11 @@ const swPlugin = new WorkboxPlugin.InjectManifest({
     /\.map/
   ],
 })
+
+const copyPlugin = new CopyWebpackPlugin([{
+  from: 'static',
+  to: 'dist'
+}])
 
 module.exports = {
   entry: {
@@ -52,6 +58,15 @@ module.exports = {
           'postcss-loader',
           'sass-loader',
         ],
+      },
+      {
+        test: /\.(png|jpg|gif|svg)$/,
+        use: [{
+          loader: 'file-loader',
+          options: {
+            name: 'assets/[name].[hash].[ext]'
+          }
+        }]
       }
     ]
   },
@@ -78,6 +93,7 @@ module.exports = {
 
   plugins: [
     htmlPlugin,
-    swPlugin
+    swPlugin,
+    copyPlugin
   ]
 };
