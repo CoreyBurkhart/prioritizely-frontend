@@ -6,4 +6,4 @@ const HomeView = () => (
   </div>
 );
 
-export default HomeView
+export default HomeView;
