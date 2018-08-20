@@ -12,7 +12,7 @@ jobs:
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
-    #   - image: circleci/mongo:3.4.4
+      - image: circleci/mongo:3.4.4
 
     working_directory: ~/prioritizely
 
@@ -47,19 +47,21 @@ jobs:
           name: Build Frontend
           command: yarn prod:build
 
-    #   - add_ssh_keys:
-    #       fingerprints: 
-    #         - "d4:84:66:9a:f9:f3:3d:ac:cf:1a:e2:4d:2f:56:02:a7"
+      - add_ssh_keys:
+          fingerprints: 
+            - "d4:84:66:9a:f9:f3:3d:ac:cf:1a:e2:4d:2f:56:02:a7"
 
       - run:
-          name: Checkout Backend
-          command: |
-            cd ./dist
-            git clone git@github.com:CoreyBurkhart/prioritizely-backend.git
+          name: Prepare Backend
+          command: ./utils/prepare-backend.sh
 
+      - run: 
+          name: Run Production Server
+          command: node ./dist/server.js
+          background: true
 
-    #   - run:
-    #       name: Run E2E Tests
-    #       command: yarn test:e2e
+      - run:
+          name: Run E2E Tests
+          command: yarn test:e2e
 
 

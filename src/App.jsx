@@ -18,6 +18,17 @@ function registerServiceWorker(path = '/service-worker.js') {
 export default class App extends React.Component {
   componentDidMount() {
     registerServiceWorker();
+
+    fetch('/api/signup', {
+      method: 'POST',
+      body: JSON.stringify({
+        email: 'test@test.com',
+        password: 'thisisatestpassword!',
+      }),
+    }).then(res => res.json())
+      .catch((error) => {
+        throw error;
+      });
   }
 
   render() {
