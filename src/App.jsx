@@ -27,12 +27,12 @@ export default class App extends React.Component {
       }),
       headers: {
         'Content-Type': 'application/json',
-        'Accept': 'application/json',
+        Accept: 'application/json',
       },
     })
       .then((res) => {
-        const element = document.getElementById('test')
-        element.innerText = res
+        const element = document.getElementById('test');
+        element.innerText = res;
       })
       .catch((error) => {
         throw error;
