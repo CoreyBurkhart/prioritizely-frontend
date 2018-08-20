@@ -18,7 +18,7 @@ const swPlugin = new WorkboxPlugin.InjectManifest({
 
 const copyPlugin = new CopyWebpackPlugin([{
   from: 'static',
-  to: 'dist'
+  to: 'static'
 }])
 
 module.exports = {
@@ -28,7 +28,7 @@ module.exports = {
   
   output: {
     filename: "[name].[hash].js",
-    path: path.resolve(__dirname, "./../dist"),
+    path: path.resolve(__dirname, "./../dist/frontend"),
   },
 
   stats: {
