@@ -47,9 +47,9 @@ jobs:
           name: Build Frontend
           command: yarn prod:build
 
-      - add_ssh_keys:
-          fingerprints: 
-            - "d4:84:66:9a:f9:f3:3d:ac:cf:1a:e2:4d:2f:56:02:a7"
+    #   - add_ssh_keys:
+    #       fingerprints: 
+    #         - "d4:84:66:9a:f9:f3:3d:ac:cf:1a:e2:4d:2f:56:02:a7"
 
       - run:
           name: Checkout Backend
