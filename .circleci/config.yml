@@ -33,12 +33,7 @@ jobs:
           name: Save Yarn Package Cache
           key: yarn-packages-{{ checksum "yarn.lock" }}
           paths:
-            - ~/.cache/yarn
-
-      - run:
-          name: Start Frontend Server
-          command: yarn dev:start
-          background: true      
+            - ~/.cache/yarn   
         
       - run:
           name: Run Code Linter
@@ -47,6 +42,10 @@ jobs:
       - run:
           name: Run Unit Tests
           command: yarn test:unit
+
+      - run:
+          name: Build Frontend
+          command: yarn prod:build
 
       - add_ssh_keys:
           fingerprints: 
