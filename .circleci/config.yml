@@ -33,11 +33,7 @@ jobs:
           name: Save Yarn Package Cache
           key: yarn-packages-{{ checksum "yarn.lock" }}
           paths:
-            - ~/.cache/yarn   
-        
-      - run:
-          name: Run Code Linter
-          command: yarn lint
+            - ~/.cache/yarn
 
       - run:
           name: Run Unit Tests
