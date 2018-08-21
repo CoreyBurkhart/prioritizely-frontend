@@ -29,13 +29,14 @@ export default class App extends React.Component {
         'Content-Type': 'application/json',
         Accept: 'application/json',
       },
-    })
+    }).then(res => res.json())
       .then((res) => {
         const element = document.getElementById('test');
         element.innerText = res;
       })
       .catch((error) => {
-        throw error;
+        const element = document.getElementById('test');
+        element.innerText = error;
       });
   }
 
