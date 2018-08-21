@@ -9,7 +9,10 @@ const dev = {
     contentBase: './',
     hot: true,
     historyApiFallback: true,
-    inline: true
+    inline: true,
+    proxy: {
+      '/api': 'http://localhost:8081'
+    }
   },
 
   plugins: [

@@ -53,6 +53,11 @@ jobs:
 
       - run: 
           name: Run Production Server
+          command: node ./dist/prioritizely-backend/dist/index.js
+          background: true
+
+      - run:
+          name: Run Frontend Server
           command: node ./dist/server.js
           background: true
 

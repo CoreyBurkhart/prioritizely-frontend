@@ -1,13 +1,19 @@
 /**
  * Production/Testing server for CircleCI
  */
-const path = require('path')
-const app = require(path.join(__dirname, './prioritizely-backend/dist/app.js'));
-const express = require('express')
-// console.log(app)
+const path = require('path');
+const express = require('express');
+const proxy = require('http-proxy-middleware');
+const app = express();
+const PORT = 8080;
 
-// serve frontend files
-app.default.use(express.static(path.resolve(__dirname, './frontend')))
+// Serve frontend
+app.use(express.static(path.resolve(__dirname, './frontend')));
 
-// start the api
-require(path.join(__dirname, './prioritizely-backend/dist/index.js'))
+// proxy requests to /api to our api
+app.use('/api', proxy({target: 'http://localhost:8081'}));
+
+// start
+app.listen(PORT, function() {
+  console.log(`Serving frontend on port ${PORT}...`);
+})
