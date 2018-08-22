@@ -23,7 +23,7 @@ const copyPlugin = new CopyWebpackPlugin([{
 
 module.exports = {
   entry: {
-    main: "./src/index.js",
+    main: ["babel-polyfill", "./src/index.js"],
   },
   
   output: {

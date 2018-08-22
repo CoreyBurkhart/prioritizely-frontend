@@ -5,6 +5,7 @@ import {
   Switch,
 } from 'react-router-dom';
 import HomeView from './views/HomeView';
+import SignupView from './views/SignupView';
 
 function registerServiceWorker(path = '/service-worker.js') {
   if ('serviceWorker' in navigator) {
@@ -18,26 +19,6 @@ function registerServiceWorker(path = '/service-worker.js') {
 export default class App extends React.Component {
   componentDidMount() {
     registerServiceWorker();
-
-    window.fetch('http://localhost:8080/api/signup', {
-      method: 'POST',
-      body: JSON.stringify({
-        email: 'test@test.com',
-        password: 'thisisatestpassword!',
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-      },
-    }).then(res => res.json())
-      .then((res) => {
-        const element = document.getElementById('test');
-        element.innerText = res;
-      })
-      .catch((error) => {
-        const element = document.getElementById('test');
-        element.innerText = error;
-      });
   }
 
   render() {
@@ -45,6 +26,7 @@ export default class App extends React.Component {
       <BrowserRouter>
         <Switch>
           <Route path="/" exact component={HomeView} />
+          <Route path="/signup" component={SignupView} />
         </Switch>
       </BrowserRouter>
     );
