@@ -10,6 +10,7 @@ const dev = {
     hot: true,
     historyApiFallback: true,
     inline: true,
+    compress: true,
     proxy: {
       '/api': 'http://localhost:8081'
     }

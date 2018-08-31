@@ -65,3 +65,6 @@ dist
 
 # styling
 .sass-cache
+
+# credentials
+google_credentials.json
