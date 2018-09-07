@@ -13,6 +13,7 @@ function SigninSignoutButton({
         variant="text"
         color="primary"
         onClick={onSignout}
+        data-testid="signout-button"
       >
         signout
       </Button>
@@ -20,7 +21,7 @@ function SigninSignoutButton({
   }
 
   return (
-    <Link to={signinPath}>
+    <Link to={signinPath} data-testid="signin-link">
       <Button
         type="button"
         variant="text"

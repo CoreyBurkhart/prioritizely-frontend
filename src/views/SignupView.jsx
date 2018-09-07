@@ -170,7 +170,7 @@ class SignupView extends React.Component {
                           margin: '10px 0 0 0',
                         }}
                       >
-                        <Link to="/signin">Already have an account?</Link>
+                        <Link data-testid="signin" to="/signin">Already have an account?</Link>
                         <Button
                           variant="contained"
                           color="primary"
