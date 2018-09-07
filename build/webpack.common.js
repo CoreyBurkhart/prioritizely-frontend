@@ -1,34 +1,14 @@
-const HtmlWebPackPlugin = require("html-webpack-plugin");
-const WorkboxPlugin = require("workbox-webpack-plugin");
-const CopyWebpackPlugin = require("copy-webpack-plugin")
-const path = require("path")
-
-const htmlPlugin = new HtmlWebPackPlugin({
-  template: "src/index.html",
-  filename: "index.html"
-});
-
-const swPlugin = new WorkboxPlugin.InjectManifest({
-  swSrc: "./src/service-worker.js",
-  exclude: [
-    /hot-update/,
-    /\.map/
-  ],
-})
-
-const copyPlugin = new CopyWebpackPlugin([{
-  from: 'static',
-  to: 'static'
-}])
+const path = require('path');
+const plugins = require('./plugins');
 
 module.exports = {
   entry: {
-    main: ["babel-polyfill", "./src/index.js"],
+    main: ['babel-polyfill', 'whatwg-fetch', './src/index.js'],
   },
-  
+
   output: {
-    filename: "[name].[hash].js",
-    path: path.resolve(__dirname, "./../dist/frontend"),
+    filename: '[name].[hash].js',
+    path: path.resolve(__dirname, './../dist/frontend'),
   },
 
   stats: {
@@ -38,7 +18,7 @@ module.exports = {
     hash: true,
     timings: true,
     chunks: false,
-    chunkModules: false
+    chunkModules: false,
   },
 
   module: {
@@ -47,34 +27,35 @@ module.exports = {
         test: /\.(js)|(jsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader"
-        }
+          loader: 'babel-loader',
+        },
       },
       {
         test: /\.(sa|sc|c)ss$/,
-        use: [
-          'style-loader',
-          'css-loader',
-          'postcss-loader',
-          'sass-loader',
-        ],
+        use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
       },
       {
         test: /\.(png|jpg|gif|svg)$/,
-        use: [{
-          loader: 'file-loader',
-          options: {
-            name: 'assets/[name].[hash].[ext]'
-          }
-        }]
-      }
-    ]
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: 'assets/[name].[hash].[ext]',
+            },
+          },
+        ],
+      },
+    ],
   },
 
   /**
-   * Implicitly resolve .js & .jsx extensions (No need to include file extension in import statements)
+   * Implicitly resolve .js & .jsx extensions (No need to include file
+   * extension in import statements)
    */
   resolve: {
+    alias: {
+      '@': path.resolve(__dirname, '../src/'),
+    },
     extensions: ['.js', '.jsx'],
   },
 
@@ -85,15 +66,11 @@ module.exports = {
         vendor: {
           test: /[\\/]node_modules[\\/]/,
           name: 'vendors',
-          chunks: 'all'
-        }
-      }
-    }
+          chunks: 'all',
+        },
+      },
+    },
   },
 
-  plugins: [
-    htmlPlugin,
-    swPlugin,
-    copyPlugin
-  ]
+  plugins: [plugins.copy, plugins.html, plugins.sw],
 };

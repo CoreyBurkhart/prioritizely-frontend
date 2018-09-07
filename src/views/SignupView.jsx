@@ -1,5 +1,7 @@
 import React from 'react';
-import { Redirect, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -9,8 +11,9 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import validate from 'validator';
 import fetchOptions from '../utils/fetch';
-import ErrorList from '../components/ErrorList';
-import fakeLogo from '../../static/images/fake-logo.svg';
+import ErrorList from '../components/presentational/ErrorList';
+import HomeLinkImg from '../components/presentational/HomeLinkImg';
+import { setAuthFlag } from '../store/actions/actionCreators';
 
 function validateEmail(v) {
   return validate.isEmail(v);
@@ -21,18 +24,17 @@ function validateName(v) {
 }
 
 function validatePassword(v) {
-  return String(v).length > 8;
+  return String(v).length > 7;
 }
 
 class SignupView extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       email: '',
       name: '',
       password: '',
       errorMessages: [],
-      shouldRedirect: false,
       dirty: {
         email: false,
         name: false,
@@ -53,7 +55,9 @@ class SignupView extends React.Component {
       .then(async (res) => {
         // use res.ok since 400-600 codes do not trigger catch
         if (res.ok) {
-          this.setState({ shouldRedirect: true });
+          const { history, dispatch } = this.props;
+          dispatch(setAuthFlag(true));
+          history.replace('/');
         } else {
           const { messages } = await res.json();
           this.setState({
@@ -82,7 +86,6 @@ class SignupView extends React.Component {
   render() {
     const {
       errorMessages,
-      shouldRedirect,
       name,
       email,
       password,
@@ -95,100 +98,105 @@ class SignupView extends React.Component {
       password: dirty.password && !validatePassword(password),
     };
 
-    if (shouldRedirect) {
-      return (<Redirect to="/" />);
-    }
-
     return (
-      <Grid container id="signup" className="view" justify="center">
-        <Grid item xs={12} sm={8} lg={4}>
-          <Paper className="base-paper">
-            <Grid
-              container
-              justify="center"
-              direction="column"
-              alignItems="center"
-            >
-              <img src={fakeLogo} className="logo" alt="Logo" />
-              <Typography className="heading" variant="headline">Create an Account</Typography>
+      <Grid container direction="column" justify="center" style={{ height: '100%' }}>
+        <Grid container item id="signup" className="view" justify="center">
+          <Grid item xs={12} sm={8} md={6} lg={4}>
+            <Paper className="base-paper">
+              <Grid
+                container
+                justify="center"
+                direction="column"
+                alignItems="center"
+              >
+                <HomeLinkImg imgClassName="logo" />
+                <Typography className="heading" variant="headline">Create an Account</Typography>
 
-              <Grid container justify="center">
-                <Grid item xs={10}>
-                  <form id="manual-signup" onSubmit={this.submitForm}>
-                    <ErrorList messages={errorMessages} />
-                    <FormControl
-                      margin="normal"
-                      error={errorStates.name}
-                      required
-                      fullWidth
-                    >
-                      <InputLabel htmlFor="name">Name</InputLabel>
-                      <Input
-                        id="name"
-                        value={name}
-                        onChange={(e) => { this.updateFormTextFieldState('name', e); }}
-                        placeholder="John Smith"
-                      />
-                    </FormControl>
-
-                    <FormControl
-                      margin="normal"
-                      error={errorStates.email}
-                      required
-                      fullWidth
-                    >
-                      <InputLabel htmlFor="email">Email</InputLabel>
-                      <Input
-                        id="email"
-                        value={email}
-                        type="email"
-                        onChange={(e) => { this.updateFormTextFieldState('email', e); }}
-                        placeholder="john@domain.com"
-                      />
-                    </FormControl>
-
-                    <FormControl
-                      margin="normal"
-                      error={errorStates.password}
-                      required
-                      fullWidth
-                    >
-                      <InputLabel htmlFor="password">Password</InputLabel>
-                      <Input
-                        id="password"
-                        value={password}
-                        type="password"
-                        onChange={(e) => { this.updateFormTextFieldState('password', e); }}
-                      />
-                    </FormControl>
-                    <Grid
-                      container
-                      direction="row"
-                      justify="space-between"
-                      alignItems="flex-start"
-                      style={{
-                        margin: '10px 0 0 0',
-                      }}
-                    >
-                      <Link to="/login">Already have an account?</Link>
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        type="submit"
-                        size="large"
+                <Grid container justify="center">
+                  <Grid item xs={10}>
+                    <form id="manual-signup" onSubmit={this.submitForm}>
+                      <ErrorList messages={errorMessages} />
+                      <FormControl
+                        margin="normal"
+                        error={errorStates.name}
+                        required
+                        fullWidth
                       >
-                        Signup
-                      </Button>
-                    </Grid>
-                  </form>
+                        <InputLabel htmlFor="name">Name</InputLabel>
+                        <Input
+                          id="name"
+                          value={name}
+                          onChange={(e) => { this.updateFormTextFieldState('name', e); }}
+                          placeholder="John Smith"
+                        />
+                      </FormControl>
+
+                      <FormControl
+                        margin="normal"
+                        error={errorStates.email}
+                        required
+                        fullWidth
+                      >
+                        <InputLabel htmlFor="email">Email</InputLabel>
+                        <Input
+                          id="email"
+                          value={email}
+                          type="email"
+                          onChange={(e) => { this.updateFormTextFieldState('email', e); }}
+                          placeholder="john@domain.com"
+                        />
+                      </FormControl>
+
+                      <FormControl
+                        margin="normal"
+                        error={errorStates.password}
+                        required
+                        fullWidth
+                      >
+                        <InputLabel htmlFor="password">Password</InputLabel>
+                        <Input
+                          id="password"
+                          value={password}
+                          type="password"
+                          onChange={(e) => { this.updateFormTextFieldState('password', e); }}
+                        />
+                      </FormControl>
+                      <Grid
+                        container
+                        direction="row"
+                        justify="space-between"
+                        alignItems="flex-start"
+                        style={{
+                          margin: '10px 0 0 0',
+                        }}
+                      >
+                        <Link to="/signin">Already have an account?</Link>
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          type="submit"
+                          size="large"
+                        >
+                          Signup
+                        </Button>
+                      </Grid>
+                    </form>
+                  </Grid>
                 </Grid>
               </Grid>
-            </Grid>
-          </Paper>
+            </Paper>
+          </Grid>
         </Grid>
       </Grid>
     );
   }
 }
 
-export default SignupView;
+SignupView.propTypes = {
+  history: PropTypes.shape({
+    replace: PropTypes.func.isRequired,
+  }).isRequired,
+  dispatch: PropTypes.func.isRequired,
+};
+
+export default connect()(SignupView);

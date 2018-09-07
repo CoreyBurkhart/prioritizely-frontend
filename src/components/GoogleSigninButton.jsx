@@ -12,7 +12,7 @@ function handleGoogleSignin(googleUser) {
     idToken,
   };
 
-  fetch('/api/auth/login/google', new fetchOptions.Post(payload))
+  fetch('/api/auth/signin/google', new fetchOptions.Post(payload))
     .then(async (res) => {
       if (res.ok) {
         handleGoogleSignin.onSuccess(res);
@@ -24,38 +24,41 @@ function handleGoogleSignin(googleUser) {
 }
 
 function renderGoogleButton() {
-  gapi.signin2.render('goog-signin2', {
-    scope: 'profile email',
-    width: 240,
-    height: 50,
-    longtitle: true,
-    theme: 'dark',
-    onsuccess: handleGoogleSignin,
-  });
+  if (gapi) {
+    gapi.signin2.render('goog-signin2', {
+      scope: 'profile email',
+      width: 240,
+      height: 50,
+      longtitle: true,
+      theme: 'dark',
+      onsuccess: handleGoogleSignin,
+    });
+  }
 }
 
-function GoogleSigninButton(props) {
-  const { onSuccess, onError, style } = props;
+class GoogleSigninButton extends React.Component {
+  constructor({ onSuccess, onError }) {
+    super();
 
-  /**
-   * TODO: find a better way of dealing with these handlers
-   */
-  handleGoogleSignin.onSuccess = onSuccess;
-  handleGoogleSignin.onError = onError;
-
-  if (gapi !== undefined) {
-    setTimeout(renderGoogleButton, 0); // pseudo "componentDidMount"
-  } else {
-    window.addEventListener('load', renderGoogleButton);
+    handleGoogleSignin.onSuccess = onSuccess;
+    handleGoogleSignin.onError = onError;
   }
 
-  return (
-    <div
-      id="goog-signin2"
-      data-onsuccess="handleGoogleSignin"
-      style={style}
-    />
-  );
+  componentDidMount() {
+    renderGoogleButton();
+  }
+
+  render() {
+    const { style } = this.props;
+
+    return (
+      <div
+        id="goog-signin2"
+        data-onsuccess="handleGoogleSignin"
+        style={style}
+      />
+    );
+  }
 }
 
 GoogleSigninButton.defaultProps = {

@@ -1,10 +1,10 @@
 import React from 'react';
-import LogoutButton from '../components/LogoutButton';
+import SigninSignoutContainer from '@/components/containers/SigninSignoutContainer';
 
 const HomeView = () => (
   <div id="test">
-    hello
-    <LogoutButton />
+    home
+    <SigninSignoutContainer />
   </div>
 );
 

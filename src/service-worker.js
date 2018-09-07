@@ -19,4 +19,12 @@ precacheManifest = precacheManifest.map((entry) => {
   return r;
 });
 
-workbox.precaching.precacheAndRoute(precacheManifest, workbox.strategies.staleWhileRevalidate());
+workbox.precaching.precacheAndRoute(precacheManifest, workbox.strategies.staleWhileRevalidate({
+  cacheName: 'main',
+  plugins: [
+    new workbox.expiration.Plugin({
+      maxAgeSeconds: 30 * 24 * 60 * 60, // 30 days
+      purgeOnQuotaError: true,
+    }),
+  ],
+}));
