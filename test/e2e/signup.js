@@ -2,7 +2,7 @@ import {
   ClientFunction,
  } from 'testcafe'
 
-fixture `Example`
+fixture `Authentication`
   .page `http://localhost:8080/signup`
 
 const getLocation = ClientFunction(() => window.location);
