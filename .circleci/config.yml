@@ -45,7 +45,7 @@ jobs:
 
       - add_ssh_keys:
           fingerprints: 
-            - "d4:84:66:9a:f9:f3:3d:ac:cf:1a:e2:4d:2f:56:02:a7"
+            - "ac:6e:d9:21:84:7e:69:34:21:79:9c:26:a2:be:55:9b"
 
       - run:
           name: Prepare Backend
@@ -53,7 +53,7 @@ jobs:
 
       - run: 
           name: Run Production Server
-          command: node ./dist/prioritizely-backend/dist/index.js
+          command: node ./dist/prioritizely-api-gateway/dist/index.js
           background: true
 
       - run:

@@ -2,8 +2,8 @@
 
 cp server.js dist
 cd ./dist
-git clone git@github.com:CoreyBurkhart/prioritizely-backend.git
-cd ./prioritizely-backend
+git clone git@github.com:CoreyBurkhart/prioritizely-api-gateway.git
+cd ./prioritizely-api-gateway
 yarn install
 yarn keygen
 yarn prod:build
