@@ -23,7 +23,7 @@ function registerServiceWorker(path = '/service-worker.js') {
 
 export default class App extends React.Component {
   componentDidMount() {
-    registerServiceWorker();
+    // registerServiceWorker();
   }
 
   render() {

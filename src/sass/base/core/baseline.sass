@@ -1,0 +1,29 @@
+body
+  background: #fff
+
+body,
+#app
+  height: 100vh;
+
+.no-scroll
+  overflow: hidden
+
+*
+  font-family: 'Roboto', sans-serif
+  // font-weight: 300
+  // font-size: 16px
+
+.example-appear,
+.example-enter
+  opacity: 0.01
+
+.example-appear.example-appear-active,
+.example-enter.example-enter-active
+  opacity: 1
+  transition: opacity 300ms ease-in;
+
+.v-padded-view
+  padding: 10px 0;
+
+.title
+  text-transform: capitalize
