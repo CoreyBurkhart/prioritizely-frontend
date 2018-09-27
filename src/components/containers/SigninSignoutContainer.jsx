@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import SigninSignoutButton from '../presentational/SigninSingoutButton';
-import { setAuthFlag } from '@/store/actions/actionCreators';
+import { setAuthFlag } from '@/store/actions/app/creators';
 
 class SigninSignoutContainer extends React.Component {
   constructor() {
@@ -44,7 +44,7 @@ SigninSignoutContainer.propTypes = {
   userAuthenticated: PropTypes.bool.isRequired,
 };
 
-const mapProps = store => ({ userAuthenticated: store.authenticated });
+const mapProps = store => ({ userAuthenticated: store.app.authenticated });
 
 const connSigninSignoutContainer = connect(mapProps)(SigninSignoutContainer);
 

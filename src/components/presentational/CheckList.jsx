@@ -12,7 +12,6 @@ import {
 } from '@material-ui/core';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 import PropTypes from 'prop-types';
-import Todo from '../utils/classes/Todo';
 
 /**
  * @param {DraggableStateSnapshot}
@@ -49,14 +48,15 @@ function CheckList({
   onEditEnd,
   onEdit,
   onDelete,
+  quadrantId,
 }) {
   return (
-    <Droppable droppableId="test">
+    <Droppable droppableId={quadrantId} type="TODO">
       {(provided, snapshot) => (
         <div ref={provided.innerRef}>
           <List component="ol" className={getListClassNames(snapshot)}>
             {items.map((item, i) => (
-              <Draggable draggableId={item.id} key={item.id} index={i}>
+              <Draggable draggableId={item.id} key={item.id} index={i} type="TODO">
                 {(dragProvided, dragSnapshot) => (
                   <div
                     ref={dragProvided.innerRef}
@@ -70,7 +70,7 @@ function CheckList({
                       </ListItemIcon>
                       <Checkbox
                         checked={item.checked}
-                        onChange={onCheck(item, i)}
+                        onChange={onCheck(item)}
                       />
                       <Input
                         disableUnderline={!item.editing}
@@ -82,13 +82,13 @@ function CheckList({
                             : 'initial',
                         }}
                         value={item.value}
-                        onFocus={onEditStart(item, i)}
-                        onChange={onEdit(item, i)}
-                        onBlur={onEditEnd(item, i)}
-                        onKeyUp={onEditEnd(item, i)}
+                        onFocus={onEditStart(item)}
+                        onChange={onEdit(item)}
+                        onBlur={onEditEnd(item)}
+                        onKeyUp={onEditEnd(item)}
                       />
                       <ListItemSecondaryAction>
-                        <IconButton onClick={onDelete(item, i)}>
+                        <IconButton onClick={onDelete(item)}>
                           <Icon>close</Icon>
                         </IconButton>
                       </ListItemSecondaryAction>
@@ -112,14 +112,24 @@ function CheckList({
   );
 }
 
+CheckList.defaultProps = {
+  quadrantId: 'defaultId',
+};
+
 CheckList.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.instanceOf(Todo)).isRequired,
+  items: PropTypes.arrayOf(PropTypes.shape({
+    checked: PropTypes.bool,
+    editing: PropTypes.bool,
+    id: PropTypes.string,
+    value: PropTypes.string,
+  })).isRequired,
   onAdd: PropTypes.func.isRequired,
   onCheck: PropTypes.func.isRequired,
   onEditStart: PropTypes.func.isRequired,
   onEditEnd: PropTypes.func.isRequired,
   onEdit: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
+  quadrantId: PropTypes.string,
 };
 
 export default CheckList;

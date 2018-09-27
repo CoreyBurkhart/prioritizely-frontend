@@ -1,5 +1,5 @@
-import initialState from '../initialState';
-import { SET_AUTH_FLAG } from '../actions/actionTypes';
+import initialState from '../states/app';
+import { SET_AUTH_FLAG } from '../actions/app/types';
 
 function app(state = initialState, action) {
   switch (action.type) {

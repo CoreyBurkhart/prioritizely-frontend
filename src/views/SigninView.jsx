@@ -13,7 +13,7 @@ import GoogleSigninButton from '../components/GoogleSigninButton';
 import ErrorList from '../components/presentational/ErrorList';
 import HomeLinkImg from '../components/presentational/HomeLinkImg';
 import fetchOptions from '../utils/fetch';
-import { setAuthFlag } from '../store/actions/actionCreators';
+import { setAuthFlag } from '../store/actions/app/creators';
 
 class SigninView extends React.Component {
   constructor(props) {

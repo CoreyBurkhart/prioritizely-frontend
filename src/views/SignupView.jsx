@@ -13,7 +13,7 @@ import validate from 'validator';
 import fetchOptions from '../utils/fetch';
 import ErrorList from '../components/presentational/ErrorList';
 import HomeLinkImg from '../components/presentational/HomeLinkImg';
-import { setAuthFlag } from '../store/actions/actionCreators';
+import { setAuthFlag } from '../store/actions/app/creators';
 
 function validateEmail(v) {
   return validate.isEmail(v);
