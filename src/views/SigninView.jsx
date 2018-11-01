@@ -10,8 +10,8 @@ import FormControl from '@material-ui/core/FormControl';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import GoogleSigninButton from '../components/GoogleSigninButton';
-import ErrorList from '../components/presentational/ErrorList';
-import HomeLinkImg from '../components/presentational/HomeLinkImg';
+import ErrorList from '../components/ErrorList';
+import HomeLinkImg from '../components/HomeLinkImg';
 import fetchOptions from '../utils/fetch';
 import { setAuthFlag } from '../store/actions/app/creators';
 
@@ -27,6 +27,10 @@ class SigninView extends React.Component {
     this.signin = this.signin.bind(this);
     this.googleSigninSuccess = this.googleSigninSuccess.bind(this);
     this.googleSigninError = this.googleSigninError.bind(this);
+  }
+
+  componentDidMount() {
+    document.title = 'Signin';
   }
 
   updateFormTextFieldState(stateKey, event) {
@@ -65,10 +69,13 @@ class SigninView extends React.Component {
     history.replace('/');
   }
 
-  googleSigninError(messages) {
-    this.setState({
-      errorMessages: messages,
-    });
+  async googleSigninError(res) {
+    if (res.headers.get('Content-Type') === 'application/json') {
+      const { messages } = await res.json();
+      this.setState({
+        errorMessages: messages,
+      });
+    }
   }
 
   render() {

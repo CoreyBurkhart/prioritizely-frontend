@@ -53,33 +53,35 @@ function CheckList({
   return (
     <Droppable droppableId={quadrantId} type="TODO">
       {(provided, snapshot) => (
-        <div ref={provided.innerRef}>
-          <List component="ol" className={getListClassNames(snapshot)}>
+        <div ref={provided.innerRef} className="full-width">
+          <List component="ol" className={`checklist-list ${getListClassNames(snapshot)}`}>
             {items.map((item, i) => (
               <Draggable draggableId={item.id} key={item.id} index={i} type="TODO">
                 {(dragProvided, dragSnapshot) => (
                   <div
                     ref={dragProvided.innerRef}
+                    className="full-width"
                     {...dragProvided.draggableProps}
                     {...dragProvided.dragHandleProps}
                     tabIndex="-1"
                   >
                     <ListItem className={getListItemClassNames(dragSnapshot)}>
                       <ListItemIcon>
-                        <Icon>drag_indicator</Icon>
+                        <Icon className="drag-icon hover-show">drag_indicator</Icon>
                       </ListItemIcon>
                       <Checkbox
+                        disableRipple
+                        className="hover-show checklist-checkbox"
                         checked={item.checked}
                         onChange={onCheck(item)}
                       />
                       <Input
-                        disableUnderline={!item.editing}
+                        disableUnderline
+                        placeholder="List Item"
                         type="text"
                         autoFocus
                         style={{
-                          textDecoration: item.checked
-                            ? 'line-through'
-                            : 'initial',
+                          textDecoration: item.checked ? 'line-through' : 'initial',
                         }}
                         value={item.value}
                         onFocus={onEditStart(item)}
@@ -89,7 +91,7 @@ function CheckList({
                       />
                       <ListItemSecondaryAction>
                         <IconButton onClick={onDelete(item)}>
-                          <Icon>close</Icon>
+                          <Icon className="hover-show delete-item">cancel</Icon>
                         </IconButton>
                       </ListItemSecondaryAction>
                     </ListItem>
@@ -97,13 +99,11 @@ function CheckList({
                 )}
               </Draggable>
             ))}
-            <ListItem onClick={onAdd}>
+            <ListItem className="checklist-add-item" onClick={onAdd}>
               <ListItemIcon>
-                <IconButton>
-                  <Icon>add_circler</Icon>
-                </IconButton>
+                <Icon className="add-icon">add</Icon>
               </ListItemIcon>
-              <ListItemText>Add item</ListItemText>
+              <span className="add-item-text">List Item</span>
             </ListItem>
           </List>
         </div>
@@ -117,12 +117,14 @@ CheckList.defaultProps = {
 };
 
 CheckList.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.shape({
-    checked: PropTypes.bool,
-    editing: PropTypes.bool,
-    id: PropTypes.string,
-    value: PropTypes.string,
-  })).isRequired,
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      checked: PropTypes.bool,
+      editing: PropTypes.bool,
+      id: PropTypes.string,
+      value: PropTypes.string,
+    }),
+  ).isRequired,
   onAdd: PropTypes.func.isRequired,
   onCheck: PropTypes.func.isRequired,
   onEditStart: PropTypes.func.isRequired,

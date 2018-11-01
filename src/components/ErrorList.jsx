@@ -1,8 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function ErrorList(props) {
-  const { messages } = props;
+function ErrorList({ messages }) {
+  if (!(messages instanceof Array)) {
+    return null;
+  }
+
   const listElements = messages
     .map(m => <li className="error-message" key={m}>{m}</li>);
 

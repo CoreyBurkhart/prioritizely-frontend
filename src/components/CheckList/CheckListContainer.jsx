@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import CheckList from '../presentational/CheckList';
-import { editTodo, addTodo, deleteTodo } from '../../store/actions/lists/creators';
+import CheckList from './CheckList';
+import { editById, addTodo, deleteTodo } from '../../store/actions/lists/creators';
 
 /**
  * @param {Object} state
@@ -23,18 +23,18 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     dispatch(addTodo(ownProps.quadrantId));
   },
   onCheck: item => (event, checked) => {
-    dispatch(editTodo(item.id, 'checked', checked));
+    dispatch(editById('todos', item.id, 'checked', checked));
   },
   onEditStart: item => () => {
-    dispatch(editTodo(item.id, 'editing', true));
+    dispatch(editById('todos', item.id, 'editing', true));
   },
   onEditEnd: item => () => {
-    dispatch(editTodo(item.id, 'editing', false));
+    dispatch(editById('todos', item.id, 'editing', false));
   },
   onEdit: item => (event) => {
     const { value } = event.target;
 
-    dispatch(editTodo(item.id, 'value', value));
+    dispatch(editById('todos', item.id, 'value', value));
   },
   onDelete: item => () => {
     dispatch(deleteTodo(ownProps.quadrantId, item.id));

@@ -2,7 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import SigninSignoutButton from '../presentational/SigninSingoutButton';
+import SigninSignoutButton from './SigninSingoutButton';
 import { setAuthFlag } from '@/store/actions/app/creators';
 
 class SigninSignoutContainer extends React.Component {

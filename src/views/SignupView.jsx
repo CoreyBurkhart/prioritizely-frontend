@@ -11,8 +11,8 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import validate from 'validator';
 import fetchOptions from '../utils/fetch';
-import ErrorList from '../components/presentational/ErrorList';
-import HomeLinkImg from '../components/presentational/HomeLinkImg';
+import ErrorList from '../components/ErrorList';
+import HomeLinkImg from '../components/HomeLinkImg';
 import { setAuthFlag } from '../store/actions/app/creators';
 
 function validateEmail(v) {
@@ -44,6 +44,10 @@ class SignupView extends React.Component {
 
     this.submitForm = this.submitForm.bind(this);
     this.updateFormTextFieldState = this.updateFormTextFieldState.bind(this);
+  }
+
+  componentDidMount() {
+    document.title = 'Signup';
   }
 
   submitForm(event) {

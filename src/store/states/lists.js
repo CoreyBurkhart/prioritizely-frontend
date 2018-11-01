@@ -1,5 +1,7 @@
+import getLastChartIdFromUrl from '@/utils/getLastChartId';
+
 export default {
-  activeChartId: 'chart1',
+  lastChartId: getLastChartIdFromUrl(),
   charts: {
     chart1: {
       name: 'test chart',

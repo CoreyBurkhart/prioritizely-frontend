@@ -1,0 +1,64 @@
+.todo-chart-title
+  max-width: 100%
+  border: none
+
+  input
+    color: white
+    font-size: 2rem
+    letter-spacing: 1.2
+
+.quadrant
+  margin: 10px 10px
+  
+  .quadrant-title
+    border-top-left-radius: 4px
+    border-top-right-radius: 4px
+    background: orangered
+    padding: 10px
+
+    label
+      color: #ccc
+
+    input
+      color: white
+      padding: 0
+      font-size: 1.5rem
+    
+.checklist-list
+  li,
+  li div
+    padding: 0
+
+  .drag-icon
+    margin: 0
+    visibility: hidden
+
+  .checklist-checkbox
+    height: 20px
+    width: 20px
+    margin: 0 10px 0 5px
+
+  .delete-item
+    visibility: hidden
+
+  .checklist-add-item
+    color: #666
+    cursor: pointer
+    font-style: italic
+    padding-left: 26px
+
+    .add-icon
+      margin-right: 10px
+
+.checklist-list li:hover,
+.checklist-list li:focus,
+  .hover-show
+    visibility: visible
+
+.dragging
+  background: #bbb
+  transition: background 100ms ease-in
+
+.dropping
+  background: #eee
+  transition: background 100ms ease-out

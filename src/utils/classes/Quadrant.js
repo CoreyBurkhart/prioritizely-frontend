@@ -4,7 +4,7 @@ class Quadrant {
   constructor(name, id, items) {
     this.name = name || '';
     this.id = id || createId();
-    this.items = items || [];
+    this.todos = items || [];
   }
 }
 

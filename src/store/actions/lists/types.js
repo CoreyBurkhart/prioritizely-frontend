@@ -1,4 +1,9 @@
-export const EDIT_TODO = 'EDIT_TODO';
+export const EDIT_BY_ID = 'EDIT_TODO';
 export const ADD_TODO = 'ADD_TODO';
 export const DELETE_TODO = 'DELETE_TODO';
 export const DND_REORDER = 'DND_REORDER';
+export const ADD_CHART = 'ADD_CHART';
+export const DELETE_CHART = 'DELETE_CHART';
+export const ADD_QUADRANT = 'ADD_QUADRANT';
+export const DELETE_QUADRANT = 'DELETE_QUADRANT';
+export const SET_LAST_CHART = 'SET_LAST_CHART';

@@ -1,10 +1,11 @@
 import {
-  EDIT_TODO, ADD_TODO, DELETE_TODO, DND_REORDER,
+  EDIT_BY_ID, ADD_TODO, DELETE_TODO, DND_REORDER, ADD_CHART, DELETE_CHART, ADD_QUADRANT, DELETE_QUADRANT, SET_LAST_CHART,
 } from './types';
 
-export const editTodo = (todoId, key, value) => ({
-  type: EDIT_TODO,
-  todoId,
+export const editById = (section, id, key, value) => ({
+  type: EDIT_BY_ID,
+  section,
+  id,
   key,
   value,
 });
@@ -25,4 +26,28 @@ export const dndReorder = result => ({
   result,
 });
 
-export default {};
+export const addChart = chart => ({
+  type: ADD_CHART,
+  chart,
+});
+
+export const deleteChart = chartId => ({
+  type: DELETE_CHART,
+  chartId,
+});
+
+export const addQuadrant = chartId => ({
+  type: ADD_QUADRANT,
+  chartId,
+});
+
+export const deleteQuadrant = (chartId, quadrantId) => ({
+  type: DELETE_QUADRANT,
+  chartId,
+  quadrantId,
+});
+
+export const setLastChart = chartId => ({
+  type: SET_LAST_CHART,
+  chartId,
+});

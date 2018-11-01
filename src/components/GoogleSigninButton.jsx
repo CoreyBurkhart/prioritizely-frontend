@@ -17,8 +17,7 @@ function handleGoogleSignin(googleUser) {
       if (res.ok) {
         handleGoogleSignin.onSuccess(res);
       } else {
-        const { messages } = await res.json();
-        handleGoogleSignin.onError(messages);
+        handleGoogleSignin.onError(res);
       }
     });
 }
@@ -45,7 +44,11 @@ class GoogleSigninButton extends React.Component {
   }
 
   componentDidMount() {
-    renderGoogleButton();
+    if (document.readyState !== 'complete') {
+      window.addEventListener('load', renderGoogleButton.bind(this));
+    } else {
+      renderGoogleButton();
+    }
   }
 
   render() {
